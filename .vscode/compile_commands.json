@@ -1,0 +1,11 @@
+[
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++20", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-Wall", "-o", "build/.objs/mips/linux/mips/release/src/main.cpp.o", "src/main.cpp"],
+  "file": "src/main.cpp"
+},
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++20", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-g", "-Wall", "-o", "build/.objs/x64/linux/x64/release/src/main.cpp.o", "src/main.cpp"],
+  "file": "src/main.cpp"
+}]

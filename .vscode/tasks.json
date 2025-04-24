@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "mips-build",
+            "type": "shell",
+            "command": "xmake",
+            "args": ["build", "mips"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "x64-build",
+            "type": "shell",
+            "command": "xmake",
+            "args": ["build", "x64"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "qemu-mips-static",
+            "args": [
+                "-g", "12345",
+                "./bin/mips/String",
+                "-serial stdio",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            
+            "dependsOn": "mips-build",
+            "isBackground": true,
+            "presentation": {
+                "clear": true
+            },
+        }
+    ]
+}

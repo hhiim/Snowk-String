@@ -1,0 +1,41 @@
+{
+    "files.associations": {
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "memory_resource": "cpp",
+        "string": "cpp",
+        "iosfwd": "cpp",
+        "streambuf": "cpp",
+        "tuple": "cpp",
+        "memory": "cpp",
+        "cstddef": "cpp",
+        "cstdint": "cpp",
+        "array": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "bit": "cpp",
+        "random": "cpp",
+        "concepts": "cpp",
+        "iostream": "cpp",
+        "atomic": "cpp",
+        "algorithm": "cpp",
+        "istream": "cpp",
+        "stdexcept": "cpp",
+        "type_traits": "cpp",
+        "new": "cpp",
+        "span": "cpp"
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+        ".xmake": true,
+        "bin": true,
+        "build": true
+    },
+    "explorerExclude.backup": {}
+}
