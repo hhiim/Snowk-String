@@ -1,6 +1,3 @@
-add_requires("catch2")
-add_packages("catch2")
-
 add_includedirs("include")
 add_includedirs("include/encode")
 add_includedirs("include/endian")

@@ -1,5 +1,9 @@
-Checks: 'modernize-*'
+Checks: 
+  'modernize-*
+  -modernize-use-trailing-return-type'
+
 WarningsAsErrors: ''
-HeaderFilterRegex: ''
+HeaderFilterRegex: '.*catch.*'
 ExtraArgs:
   - '-std=c++23'  # 指定 C++ 标准
+

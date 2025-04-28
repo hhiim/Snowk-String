@@ -1,4 +1,4 @@
-#include <catch2/catch_all.hpp>
+#include "catch_amalgamated.hpp"
 #include <cstdint>
 
 uint32_t factorial( uint32_t number ) {

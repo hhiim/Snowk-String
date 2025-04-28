@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "matepek.vscode-catch2-test-adapter",
+        "imrichardcole.benchmark-vscode",
+        "kylinideteam.kylin-clangd",
+        "llvm-vs-code-extensions.vscode-clangd",
+        "cs128.cs128-clang-tidy",
+        "tboox.xmake-vscode",
+        "piotrkosek.vscode-gtest-test-adapter-with-code-lens",
+        "vadimcn.vscode-lldb",
+        "peterschmalfeldt.explorer-exclude",
+        "mhutchie.git-graph",
+        "hbenl.vscode-test-explorer",
+        "gruntfuggly.todo-tree"
+    ]
+}

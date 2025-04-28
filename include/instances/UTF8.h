@@ -142,8 +142,6 @@ public:
         } else if (unicode <= 0x10FFFF) {
             length = 4;
         } else {
-            char8_t* utf8 = new char8_t[1];
-            utf8[0] = '\0';
             return;
         }
 
