@@ -21,7 +21,7 @@ private:
     size_t capacity;
     size_t size;
     using ptr = conditional_t<COW,
-        shared_ptr<code_it>, code_it*>>;
+        shared_ptr<code_it>, code_it*>;
     ptr data;
 public:
     // 支持多种源字符串编码

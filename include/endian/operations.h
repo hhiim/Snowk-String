@@ -1,19 +1,13 @@
 #ifndef OPERATIONS_H
 #define OPERATIONS_H
 
-#include <memory>
-#include <concepts>
-#include <type_traits>
-#include "endianless.h"
-
-namespace Dstring {
-using namespace std;
-
 // 对于二元运算：
 // 两者都是 endianless 情况
 // 1. 读写端序一致，返回数据随运算后类型
 // 2. 读写端序不一致，不匹配
 // 只有一个 endianless 的情况，就地运算并返回 endianless
+
+
 # define binOp(op) \
     template <\
         typename D1, typename D2,\
@@ -63,7 +57,5 @@ placeOp(&=); placeOp(|=); placeOp(^=); placeOp(%=);
         return lhs op rhs;\
     };
 cmpOp(==); cmpOp(<);
-
-};
 
 #endif

@@ -35,7 +35,11 @@
         "**/Thumbs.db": true,
         ".xmake": true,
         "bin": true,
-        "build": true
+        "build": true,
+        ".cache": true,
+        ".clangd": true,
+        "**/compile_commands.json": true,
+        ".clang-tidy": true
     },
-    "explorerExclude.backup": {}
+    "explorerExclude.backup": {},
 }

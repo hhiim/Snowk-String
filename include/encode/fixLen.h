@@ -1,6 +1,8 @@
 #ifndef FIXLEN_H
 #define FIXLEN_H
 
+#include <memory>
+
 template <typename sub, typename T>
 class fixLen {
 protected:

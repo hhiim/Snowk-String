@@ -1,0 +1,5 @@
+Checks: 'modernize-*'
+WarningsAsErrors: ''
+HeaderFilterRegex: ''
+ExtraArgs:
+  - '-std=c++23'  # 指定 C++ 标准

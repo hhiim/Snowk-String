@@ -1,11 +1,21 @@
 [
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++20", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-Wall", "-o", "build/.objs/mips/linux/mips/release/src/main.cpp.o", "src/main.cpp"],
+  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-isystem", "/home/knight/.xmake/packages/c/catch2/v3.8.1/6793b9d388e14b2dbf2c637163c09add/include", "-g", "-Wall", "-fpermissive", "-o", "build/.objs/mips-test/linux/mips/release/test/test1.cpp.o", "test/test1.cpp"],
+  "file": "test/test1.cpp"
+},
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-isystem", "/home/knight/.xmake/packages/c/catch2/v3.8.1/6793b9d388e14b2dbf2c637163c09add/include", "-g", "-Wall", "-fpermissive", "-o", "build/.objs/x64-test/linux/x64/release/test/test1.cpp.o", "test/test1.cpp"],
+  "file": "test/test1.cpp"
+},
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-isystem", "/home/knight/.xmake/packages/c/catch2/v3.8.1/6793b9d388e14b2dbf2c637163c09add/include", "-g", "-Wall", "-fpermissive", "-o", "build/.objs/x64/linux/x64/release/src/main.cpp.o", "src/main.cpp"],
   "file": "src/main.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++20", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-g", "-Wall", "-o", "build/.objs/x64/linux/x64/release/src/main.cpp.o", "src/main.cpp"],
+  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-isystem", "/home/knight/.xmake/packages/c/catch2/v3.8.1/6793b9d388e14b2dbf2c637163c09add/include", "-g", "-Wall", "-fpermissive", "-o", "build/.objs/mips/linux/mips/release/src/main.cpp.o", "src/main.cpp"],
   "file": "src/main.cpp"
 }]

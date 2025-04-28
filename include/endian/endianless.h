@@ -8,7 +8,7 @@
 namespace Dstring {
 using namespace std;
 
-constexpr auto E = endian::native;
+const auto E = endian::native;
 
 //  字节序转换
 template<typename T>
@@ -36,8 +36,9 @@ void endianTransfer(T* data, size_t n) {
 template <typename T, endian read, endian write>
 class endianless{
 public:
-    T data;
-    endianless(T data) : data(data) {}
+    T& data;
+    endianless(T& data) : data(data) {}
+    endianless(T&& old) noexcept : data(std::move(old)) {} 
 
     // 读取
     template<typename U>
@@ -66,6 +67,13 @@ public:
             return consist ? temp : endianTransfer(temp);
         }
     }
+
+    template <typename U>
+    auto staticCast(){
+        endianless<U,read,write>(
+            static_cast<U>(data)
+        );
+    }
 };
 
 // 判断是否属于 endianless
@@ -76,18 +84,9 @@ namespace{
 template <typename T>
 concept isEndianless = requires(T t) { f(t); };
 
-// 端序无关指针
-template <typename T, endian read, endian write>
-class endianPtr{
-private:
-    T* data;
-public:
-};
-
-
-};
-
 # include "operations.h"
 
+};
+# include "endianPtr.h"
 
 #endif
