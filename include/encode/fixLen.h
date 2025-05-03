@@ -1,14 +1,27 @@
 #ifndef FIXLEN_H
 #define FIXLEN_H
 
-#include <memory>
+#include "common.h"
+#include "metaprogram/functional.h"
+
+namespace Dstring {
+
+template <typename T> struct getEndian;
+template <template <endian> class Template, endian Arg>
+struct getEndian<Template<Arg>> {
+    const static endian E = Arg;
+};
 
 template <typename sub, typename T>
 class fixLen {
 protected:
     static const bool fix = true;
-    T* p;
+    static const endian E = getEndian<sub>::E;
+    typedef endianless<char32_t, E> Char;
+
+    fixLen(){}
 public:
+    endianPtr<T,E> p;
     fixLen& operator++() {
         p ++;
         return *this;
@@ -29,16 +42,16 @@ public:
         return tmp;
     }
 
-    char32_t operator*() const {
+    Char operator*() {
         return sub::decode(p);
     }
-    char32_t operator[](size_t index) const {
-        T* cursor = p;
+    Char operator[](size_t index)  {
+        endianPtr<T,E> cursor = p;
         cursor += index;
-        return decode(cursor);
+        return sub::decode(cursor);
     }
 
-    bool operator==(sub other) const{
+    bool operator==(sub other){
         return (this->p) == other.p;
     }
 
@@ -52,5 +65,9 @@ public:
         return len()*sizeof(T);
     }
 };
+    
+
+}
+
 
 #endif

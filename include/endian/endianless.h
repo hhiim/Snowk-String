@@ -65,7 +65,8 @@ public:
     template<typename U>
     void operator=(const U& u){
         if constexpr (is_convertible_v<U,T>) {
-            data = endianCons<T,E>((T)u);
+            auto temp = (T)u;
+            data = endianCons<T,E>(temp);
         } else {
             T* p = become<T*>(&u);
             data = endianCons<T,E>(*p);

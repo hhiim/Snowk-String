@@ -1,6 +1,7 @@
 #ifndef ENDIANPTR_H
 #define ENDIANPTR_H 
 
+#include <bit>
 #include <iostream>
 #include <memory>
 #include "endianless.h"  //  NOLINT
@@ -15,6 +16,7 @@ class endianPtr{
 public:
     T* ptr;
     endianPtr(T* ptr) : ptr(ptr) {}
+    endianPtr(){}
 
     endianPtr& operator++() {
         ptr++;
@@ -54,8 +56,12 @@ public:
         ptr -= rhs;
         return *this;
     }
-};
 
+    using Ptr = T*; 
+    operator Ptr() {
+        return ptr;
+    }
+};
 namespace{
     template <typename D, endian E>
     void f(endianPtr<D,E> t){};
@@ -66,20 +72,20 @@ concept isEndianPtr = requires(T t) { f(t); };
 
 // 加减法运算符重载
 #define PTR endianPtr<D,E>
-    template <typename D, endian E>
-    PTR operator+(const PTR& lhs, int rhs)
+    template <typename T, typename D, endian E>
+    PTR operator+(const PTR& lhs, T rhs)
         {return PTR{lhs.ptr+rhs}; }
 
-    template <typename D, endian E>
-    PTR operator+(int lhs, const PTR& rhs)
+    template <typename T,typename D, endian E>
+    PTR operator+(T lhs, const PTR& rhs)
         {return PTR{rhs.ptr+lhs}; }
 
-    template <typename D, endian E>
-    PTR operator-(const PTR& lhs, int rhs)
+    template <typename T, typename D, endian E>
+    PTR operator-(const PTR& lhs, T rhs)
         {return PTR{lhs.ptr-rhs}; }
 
-    template <typename D, endian E>
-    PTR operator-(int lhs, const PTR& rhs)
+    template <typename T, typename D, endian E>
+    PTR operator-(T lhs, const PTR& rhs)
         {return PTR{rhs.ptr-lhs}; }
 #undef PTR
 }

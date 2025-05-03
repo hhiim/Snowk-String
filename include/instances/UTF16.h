@@ -1,23 +1,21 @@
 #ifndef UTF_16_H
 #define UTF_16_H
 
-#include <memory>
-#include "endianless.h"
-#include "endianPtr.h"
+#include "common.h"
 #include "static_cast.h"
+
 
 namespace Dstring {
 using namespace std;
 
 template<endian E = endian::native>
 class UTF16 {
-    using char16 = endianless<char16_t, E>;
-    using pchar16 = endianPtr<char16_t, E>;
-    using Char = endianless<char32_t, E>;
-    using pChar = endianPtr<char32_t, E>;
-
     static const bool fix = false;
-    
+    typedef endianless<char32_t, E> Char;
+    typedef endianPtr<char32_t, E> pChar;
+    typedef endianless<char16_t, E> char16;
+    typedef endianPtr<char16_t, E> pchar16;
+
 public:
     pchar16 p;
     UTF16(char16_t* ptr) : p(ptr) {}
@@ -68,7 +66,7 @@ public:
         } return sum;
     }
     size_t size() const {
-        char16_t* cursor = p;
+        auto cursor = p;
         size_t sum = 0;
         while (*cursor != u'\0') {
             sum += 2; // 每个 UTF-16 单元占 2 字节
@@ -84,7 +82,6 @@ public:
             }
         } return nullptr;
     }
-    // ! 应该没什么问题
     static size_t get_width(char16 unit) {
         if (unit < 0xD800 || unit > 0xDFFF) return 1; // BMP 字符
         if (unit >= 0xD800 && unit <= 0xDBFF) return 2; // 高位代理

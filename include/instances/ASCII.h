@@ -9,18 +9,24 @@
 namespace Dstring {
 using namespace std;
 
-struct ASCII: public fixLen<ASCII,char>{
+template<endian E = endian::native>
+struct ASCII: public fixLen<ASCII<E>,char>{
 public:
-    ASCII(char* ptr){ p = ptr; };
-    ASCII (const ASCII &obj){ p = obj.p; }
+    typedef endianless<char32_t, E> Char;
+    typedef endianless<char, E> achar;
+    typedef endianPtr<char, E> pachar;
 
-    char32_t decode(char* p) {
-        return static_cast<char32_t>(*p);
+    ASCII(char* ptr)         { this->p.ptr = ptr; }
+    ASCII(pachar ptr)        { this->p = ptr; }
+    ASCII (const ASCII &obj) { this->p = obj.p; }
+
+    static Char decode(pachar p) {
+        return static_cast<Char>(*p);
     }
     
-    void encode(char32_t unicode, char* ptr){
+    static void encode(Char unicode, pachar ptr){
         if (unicode <= 0x7F) [[likely]] {
-            *ptr = static_cast<char>(unicode);
+            *ptr = static_cast<achar>(unicode);
         } else { *ptr = '\0'; }
     }
 };

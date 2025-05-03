@@ -1,11 +1,12 @@
 #ifndef UTF_8_H
 #define UTF_8_H
 
-#include <memory>
+#include "common.h"
 
 namespace Dstring {
 using namespace std;
 
+template<endian E = endian::native>
 class UTF8 {
     static const bool fix = false;
     char8_t* p;

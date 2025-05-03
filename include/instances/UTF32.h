@@ -1,27 +1,32 @@
 #ifndef UTF_32_H
 #define UTF_32_H
 
-#include <memory>
-#include "encode/fixLen.h"
+#include "common.h"
+#include "fixLen.h"
 
 namespace Dstring {
 using namespace std;
 
-struct UTF32: public fixLen<UTF32,char32_t>{
-    public:
-        UTF32(char32_t* ptr){ p = ptr; };
-        UTF32 (const UTF32 &obj){ p = obj.p; }
+template<endian E = endian::native>
+class UTF32: public fixLen<UTF32<E>, char32_t>{
+public:
+    typedef endianless<char32_t, E> Char;
+    typedef endianPtr<char32_t, E> pChar;
+
+    UTF32(char32_t* ptr)     { this->p.ptr = ptr; }
+    UTF32(pChar ptr)         { this->p = ptr; }
+    UTF32 (const UTF32 &obj) { this->p = obj.p; }
+
+    static Char decode(pChar p) {
+        return *p;
+    }
     
-        char32_t decode(char32_t* p) {
-            return *p;
-        }
-        
-        void encode(char32_t unicode, char32_t* ptr){
-            if (unicode <= 0x10FFFF) [[likely]] {
-                *ptr = unicode;
-            } else { *ptr = U'\xFFFD'; }
-        }
-    };
+    static void encode(Char unicode, pChar ptr){
+        if (unicode <= 0x10FFFF) [[likely]] {
+            *ptr = unicode;
+        } else { *ptr = U'\xFFFD'; }
+    }
+};
 
 }
 

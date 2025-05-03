@@ -1,6 +1,5 @@
 #include "UTF16.h"
 #include "catch_amalgamated.hpp"
-#include "./testing.hpp"
 #include "endianPtr.h"
 #include "endianless.h"
 #include <bit>
