@@ -1,5 +1,11 @@
 Diagnostics:
   UnusedIncludes: None
+  Suppress:
+    - "circular_header_inclusion"  # 禁用循环头文件包含警告
 
 CompileFlags:
   Add: [-Wno-writable-strings]
+
+InlayHints:
+  ParameterNames: false
+  DeducedTypes: false

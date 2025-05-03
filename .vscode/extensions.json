@@ -1,7 +1,6 @@
 {
     "recommendations": [
         "matepek.vscode-catch2-test-adapter",
-        "imrichardcole.benchmark-vscode",
         "kylinideteam.kylin-clangd",
         "llvm-vs-code-extensions.vscode-clangd",
         "cs128.cs128-clang-tidy",

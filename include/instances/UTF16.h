@@ -3,23 +3,25 @@
 
 #include <memory>
 #include "endianless.h"
+#include "endianPtr.h"
 #include "static_cast.h"
 
 namespace Dstring {
 using namespace std;
 
-template<endian read = E, endian write = E>
+template<endian E = endian::native>
 class UTF16 {
-    using char16 = endianless<char16_t, read, write>;
-    using pchar16 = endianPtr<char16_t, read, write>;
-    using Char = endianless<char32_t, read, write>;
-    using pChar = endianPtr<char32_t, read, write>;
+    using char16 = endianless<char16_t, E>;
+    using pchar16 = endianPtr<char16_t, E>;
+    using Char = endianless<char32_t, E>;
+    using pChar = endianPtr<char32_t, E>;
 
     static const bool fix = false;
-    pchar16 p;
-
+    
 public:
+    pchar16 p;
     UTF16(char16_t* ptr) : p(ptr) {}
+    UTF16(pchar16 ptr) : p(ptr.ptr) {}
     UTF16(const UTF16& obj) : p(obj.p) {}
 
     // ! 已修改
@@ -44,7 +46,12 @@ public:
         return tmp;
     }
 
-    char32_t operator*() const {
+
+    // 实现 迭代器接口
+    auto begin(){ return *this; }
+    auto end(){ return UTF16(p + len()); }
+
+    Char operator*() const {
         return decode(p);
     }
 
@@ -53,13 +60,12 @@ public:
     }
 
     size_t len() const {
-        char16_t* cursor = p;
+        auto cursor = p;
         size_t sum = 0;
         while (*cursor != u'\0') {
             sum += 1;
             cursor += get_width(*cursor);
-        }
-        return sum;
+        } return sum;
     }
     size_t size() const {
         char16_t* cursor = p;
@@ -85,10 +91,10 @@ public:
         return 1; // 无效或低位代理
     }
 
-    static Char decode(const pchar16 p) {
+    static Char decode(pchar16 p) {
         char16 unit = *p;
         if (unit < 0xD800 || unit > 0xDFFF) { // BMP 字符
-            return static_cast<char32_t>(unit);
+            return static_cast<Char>(unit);
         } else if (unit >= 0xD800 && unit <= 0xDBFF) { // 高位代理
             char16 low = *(p + 1);
             if (low >= 0xDC00 && low <= 0xDFFF) { // 跟随一个低位代理
@@ -108,7 +114,7 @@ public:
         return decode(cursor);
     }
 
-    static void encode(Char unicode, char16* ptr) {
+    static void encode(Char unicode, pchar16 ptr) {
         if (unicode <= 0xFFFF) { // BMP 字符
             ptr[0] = static_cast<char16>(unicode);
         } else if (unicode <= 0x10FFFF) { // 补充平面字符

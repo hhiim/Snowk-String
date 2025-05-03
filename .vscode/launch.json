@@ -2,33 +2,40 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "MIPS Debug",
-            "type": "cppdbg",
+            "type": "lldb",
             "request": "launch",
-            "program": "${workspaceRoot}/bin/mips/String",
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "gdb-multiarch",
-            "miDebuggerServerAddress": "localhost:12345",
-            "setupCommands": [
-                {
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                },
-                {
-                    "text": "set arch mips",
-                    "ignoreFailures": true
-                },
-                {
-                    "text": "set endian big",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "run",
-
+            "name": "LLDB Debug",
+            "program": "${workspaceFolder}/bin/x64/String",
+            "args": [],
+            "cwd": "${workspaceFolder}"
         },
+        // {
+        //     "name": "MIPS Debug",
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "program": "${workspaceRoot}/bin/mips/String",
+        //     "stopAtEntry": false,
+        //     "cwd": "${workspaceFolder}",
+        //     "externalConsole": false,
+        //     "MIMode": "gdb",
+        //     "miDebuggerPath": "gdb-multiarch",
+        //     "miDebuggerServerAddress": "localhost:12345",
+        //     "setupCommands": [
+        //         {
+        //             "text": "-enable-pretty-printing",
+        //             "ignoreFailures": true
+        //         },
+        //         {
+        //             "text": "set arch mips",
+        //             "ignoreFailures": true
+        //         },
+        //         {
+        //             "text": "set endian big",
+        //             "ignoreFailures": true
+        //         }
+        //     ],
+        //     "preLaunchTask": "run",
+        // },
 
         {
             "name": "x64 Debug",

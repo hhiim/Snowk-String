@@ -3,18 +3,17 @@
 
 #include <iostream>
 #include <memory>
-#include "endianless.h"
+#include "endianless.h"  //  NOLINT
 
 namespace Dstring{
 using namespace std;
 
 // 端序无关指针
-template <typename T, endian R, endian W>
+template <typename T, endian E>
 class endianPtr{
-    using Content = endianless<T,R,W>;
-private:
-    T* ptr;
+    using Content = endianless<T,E>;
 public:
+    T* ptr;
     endianPtr(T* ptr) : ptr(ptr) {}
 
     endianPtr& operator++() {
@@ -38,42 +37,50 @@ public:
     }
 
     Content& operator*(){
-        Content temp{*ptr};
-        return temp;
+        return *reinterpret_cast<Content*>(ptr);
     }
     Content& operator[](int i){
-        Content temp{*(ptr+i)};
-        return temp;
+        return *reinterpret_cast<Content*>(ptr+i);
     }
 
     Content* operator->()
         {return this->ptr; }
+    
+    endianPtr& operator+=(int rhs){
+        ptr += rhs;
+        return *this;
+    }
+    endianPtr& operator-=(int rhs){
+        ptr -= rhs;
+        return *this;
+    }
 };
 
 namespace{
-    template <typename D, endian R, endian W>
-    void f(endianPtr<D,R,W> t){};
+    template <typename D, endian E>
+    void f(endianPtr<D,E> t){};
 }
 template <typename T>
 concept isEndianPtr = requires(T t) { f(t); };
 
 
 // 加减法运算符重载
-template <typename T, endian R, endian W>
-auto operator+(const endianPtr<T,R,W>& lhs, int rhs)
-    {return endianPtr<T,R,W>{lhs.ptr+rhs}; }
+#define PTR endianPtr<D,E>
+    template <typename D, endian E>
+    PTR operator+(const PTR& lhs, int rhs)
+        {return PTR{lhs.ptr+rhs}; }
 
-template <typename T, endian R, endian W>
-auto operator+(int lhs, const endianPtr<T,R,W>& rhs)
-    {return endianPtr<T,R,W>{rhs.ptr+lhs}; }
+    template <typename D, endian E>
+    PTR operator+(int lhs, const PTR& rhs)
+        {return PTR{rhs.ptr+lhs}; }
 
-template <typename T, endian R, endian W>
-auto operator-(const endianPtr<T,R,W>& lhs, int rhs)
-    {return endianPtr<T,R,W>{lhs.ptr-rhs}; }
+    template <typename D, endian E>
+    PTR operator-(const PTR& lhs, int rhs)
+        {return PTR{lhs.ptr-rhs}; }
 
-template <typename T, endian R, endian W>
-auto operator-(int lhs, const endianPtr<T,R,W>& rhs)
-    {return endianPtr<T,R,W>{rhs.ptr-lhs}; }
-
+    template <typename D, endian E>
+    PTR operator-(int lhs, const PTR& rhs)
+        {return PTR{rhs.ptr-lhs}; }
+#undef PTR
 }
 #endif

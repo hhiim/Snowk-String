@@ -24,4 +24,8 @@ concept Ft = std::same_as<F, False<false>>;
 #define CHECK_f(X) using check = False<X>
 #define CHECK(X) (typename X::check){}
 
+constexpr bool IF(bool p, bool q){
+    return !p || q;
+}
+
 #endif

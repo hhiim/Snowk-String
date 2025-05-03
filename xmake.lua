@@ -5,7 +5,9 @@ add_includedirs("include/instances")
 add_includedirs("include/metaprogram")
 
 set_languages("c23", "c++23")
-add_cxxflags("-g","-Wall","-fpermissive", {force = true} )
+add_cxxflags(
+    "-g","-W","-fpermissive", "-O3"
+)
 
 
 
@@ -61,10 +63,17 @@ target_end()
 target("x64-test")
     set_arch("x64")
     set_basename("String")
-    set_toolchains("gcc")
+    set_toolchains("clang-19")
     set_kind("binary")
     set_targetdir("bin/x64/test")
     add_files("test/*.cpp")
+target_end()
+
+task("taskB")
+    on_run(function ()
+        os.exec("xmake build x64-test") -- 显式调用前置任务
+        os.exec("xmake build mips-test") -- 显式调用前置任务
+    end)
 target_end()
 
 

@@ -1,92 +1,126 @@
 #ifndef ENDIANLESS_H
 #define ENDIANLESS_H
 
+#include <algorithm>
+#include <array>
+#include <bit>
+#include <cstddef>
 #include <iostream>
 #include <memory>
+#include <sys/cdefs.h>
 
 
 namespace Dstring {
-using namespace std;
 
-const auto E = endian::native;
+using std::is_convertible_v;
+using std::endian;
+using std::byte;
+
+template<size_t N>
+using bytes = std::array<byte, N>;
+#define become std::bit_cast
+
+// 拷贝反转函数
+template <size_t N> __always_inline
+auto reverse(const bytes<N>& x){
+    bytes<N> y;
+    std::reverse_copy(
+        x.begin(), x.end(),
+        y.begin()
+    ); return y;
+}
 
 //  字节序转换
-template<typename T>
-__always_inline T endianTransfer(T data) {
-    size_t size = sizeof(T);
-    char* p = (char*)&data;
-    char* q = new char[size];
-    for (size_t i = 0; i < size; i++) {
-        q[i] = p[size - 1 - i];
-    }
-    T result = *(T*)q;
-    delete[] q;
-    return result;
+template<typename T, endian E = endian::native>
+__always_inline auto endianCons(T& data) {
+    constexpr size_t size = sizeof(T);
+    byte* source = become<byte*>(&data);
+    bytes<size> target;
+    if constexpr (E == endian::native) {
+        std::copy(
+            source, source+size,
+            target.begin()
+        );
+    }else {
+        std::reverse_copy(
+            source, source+size,
+            target.begin()
+        );
+    } return target;
 }
 
-template<typename T>
-void endianTransfer(T* data, size_t n) {
-    for (size_t i = 0; i < n; i++) {
-        data[i] = endianTransfer(data[i]);
-    }
-}
-
-// 端序无关数据类型
-// 内部统一使用机器端序，读写时转换为设定端序
-template <typename T, endian read, endian write>
+// 端序无关数据类型（显示指明读写端序）
+template <typename T, endian E = endian::native>
 class endianless{
 public:
-    T& data;
-    endianless(T& data) : data(data) {}
-    endianless(T&& old) noexcept : data(std::move(old)) {} 
+    bytes<sizeof(T)> data;
 
-    // 读取
+    endianless() : data(){}
+    endianless(T t) : data(
+        endianCons<T, E>(t)
+    ){}
+    endianless(bytes<sizeof(T)> data): data(data){}
+
+    // 赋值构造
     template<typename U>
     void operator=(const U& u){
-        bool consist = (read == endian::native);
         if constexpr (is_convertible_v<U,T>) {
-            T temp = (T)u;
-            data = consist ? temp : endianTransfer(temp);
+            data = endianCons<T,E>((T)u);
         } else {
-            void* p = (void*)u;
-            T temp = *(T*)p;
-            data = consist ? temp : endianTransfer(temp);
+            T* p = become<T*>(&u);
+            data = endianCons<T,E>(*p);
         }
     }
 
-    // 写入
+    __always_inline T get() const{
+        if constexpr(E == endian::native){
+            return *become<T*>(&data[0]);
+        }else{
+            auto newArray = reverse(data);
+            T* p = become<T*>(&newArray[0]);
+            return *p;
+        }
+    }
+
+    // 强制转换
     template<typename U>
-    operator U(){
-        bool consist = (write == endian::native);
-        if constexpr (is_convertible_v<T,U>) {
-            U temp = (U)data;
-            return consist ? temp : endianTransfer(temp);
-        } else {
-            void* p = (void*)data;
-            U temp = *(U*)p;
-            return consist ? temp : endianTransfer(temp);
+    __always_inline  operator U() const{
+        if constexpr (is_convertible_v<U,T>) {
+            return static_cast<U>(get());
+        } else{
+            static_assert(sizeof(T) == sizeof(U));
+            T t = get();
+            return *(become<U*>(&t));
         }
     }
 
     template <typename U>
-    auto staticCast(){
-        endianless<U,read,write>(
-            static_cast<U>(data)
-        );
+    __always_inline U staticCast(){
+        return U(this->get());
     }
 };
 
 // 判断是否属于 endianless
 namespace{
-    template <typename D, endian R, endian W>
-    void f(endianless<D,R,W> t){};
+    template <typename D, endian E>
+    void f(endianless<D,E> t){};
 }
 template <typename T>
 concept isEndianless = requires(T t) { f(t); };
 
 # include "operations.h"
 
-};
-# include "endianPtr.h"
+binOp(+); binOp(-); binOp(*); binOp(/);
+binOp(&); binOp(|); binOp(^); binOp(%);
+binOp(>>); binOp(<<);
 
+placeOp(+=); placeOp(-=); placeOp(*=); placeOp(/=);
+placeOp(&=); placeOp(|=); placeOp(^=); placeOp(%=);
+
+cmpOp(==); cmpOp(<);  cmpOp(>);
+cmpOp(!=); cmpOp(<=); cmpOp(>=);
+
+};
+
+#undef become
 #endif

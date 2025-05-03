@@ -34,12 +34,14 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         ".xmake": true,
-        "bin": true,
+        "bin": false,
         "build": true,
         ".cache": true,
-        ".clangd": true,
+        ".clangd": false,
         "**/compile_commands.json": true,
-        ".clang-tidy": true
+        ".clang-tidy": true,
+        "test/catch_amalgamated.cpp": true,
+        "test/catch_amalgamated.hpp": true
     },
     "explorerExclude.backup": {},
 }
