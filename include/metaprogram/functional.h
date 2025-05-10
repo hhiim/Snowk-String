@@ -14,7 +14,6 @@ auto foo(F f,Args&&...args) {
     return f(std::forward<Args>(args)...);
 }
 
-
 template <typename T>
 struct funcTraits;
 

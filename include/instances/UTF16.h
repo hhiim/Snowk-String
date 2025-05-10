@@ -10,13 +10,13 @@ using namespace std;
 
 template<endian E = endian::native>
 class UTF16 {
+public:
     static const bool fix = false;
     typedef endianless<char32_t, E> Char;
     typedef endianPtr<char32_t, E> pChar;
     typedef endianless<char16_t, E> char16;
     typedef endianPtr<char16_t, E> pchar16;
 
-public:
     pchar16 p;
     UTF16(char16_t* ptr) : p(ptr) {}
     UTF16(pchar16 ptr) : p(ptr.ptr) {}

@@ -58,7 +58,7 @@ public:
     }
 
     using Ptr = T*; 
-    operator Ptr() {
+    operator Ptr() const{
         return ptr;
     }
 };

@@ -1,37 +1,14 @@
-#include "endianless.h"
-#include <bit>
+#include "UTF8.h"
+#include "encode.h"
 #include <cassert>
-
-
-using namespace std;
 using namespace Dstring;
 
+int main() {
+    UTF8 utf8((char8_t*)u8"Hello, World!");
+    assert(utf8[0] == U'H');
+    assert(utf8[1] == U'e');
+    assert(utf8[2] == U'l');
+    assert(utf8[3] == U'l');
 
-struct A {
-    int a = 1;
-    int b = 2;
-    int c = 3;
-    int d = 4;
-    bool same_as(const A& rhs){
-        return
-            a == rhs.a &&
-            b == rhs.b &&
-            c == rhs.c &&
-            d == rhs.d;
-    }
-};
-
-int main(int argc, char const *argv[]) {
-    endianless<A> a = A{};
-    auto b = reverse(a.get());
-    endianless<A,endian::little> c(b);
-
-    assert(a.get().same_as(c.get()));
-
-    cout << c.get().a << endl;
-    cout << c.get().b << endl;
-    cout << c.get().c << endl;
-    cout << c.get().d << endl;
-    cout << "==============" << endl;
-    return 0;
+    static_assert(Encode<UTF8<>>);
 }

@@ -37,7 +37,7 @@
         "bin": false,
         "build": true,
         ".cache": true,
-        ".clangd": true,
+        ".clangd": false,
         "**/compile_commands.json": true,
         ".clang-tidy": true,
         "test/catch_amalgamated.cpp": true,

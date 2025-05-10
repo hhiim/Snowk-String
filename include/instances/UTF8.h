@@ -8,11 +8,17 @@ using namespace std;
 
 template<endian E = endian::native>
 class UTF8 {
-    static const bool fix = false;
-    char8_t* p;
 public:
-    UTF8(char8_t* ptr) : p(ptr){};
-    UTF8 (const UTF8 &obj){ p = obj.p; }
+    static const bool fix = false;
+    typedef endianless<char32_t, E> Char;
+    typedef endianPtr<char32_t, E> pChar;
+    typedef endianless<char8_t, E> char8;
+    typedef endianPtr<char8_t, E> pchar8;
+
+    pchar8 p;
+    UTF8(char8_t* ptr) : p(ptr) {}
+    UTF8(pchar8 ptr) : p(ptr.ptr) {}
+    UTF8(const UTF8& obj) : p(obj.p) {}
 
     UTF8& operator++() {
         p += get_width(*p);
@@ -35,12 +41,15 @@ public:
         return tmp;
     }
 
-    char32_t operator*() const {
+    Char operator*() const {
         return decode(p);
     }
 
     bool operator==(UTF8& other) const{
         return (this->p) == other.p;
+    }
+    bool operator!=(UTF8& other) const{
+        return (this->p) != other.p;
     }
 
     // 获取码点级长度
@@ -82,12 +91,11 @@ public:
         else if ((byte & 0xE0) == 0xC0) return 2; // 110xxxxx
         else if ((byte & 0xF0) == 0xE0) return 3; // 1110xxxx
         else if ((byte & 0xF8) == 0xF0) return 4; // 11110xxx
-        // Invalid UTF-8 sequence
         return 1;
     }
 
     // 获取 UTF8 指针的 Unicode 码点
-    static char32_t decode(const char8_t* p){
+    static Char decode(pchar8 p){
         uint8_t byte = static_cast<uint8_t>(*p);
         size_t width = get_width(byte);
 
@@ -122,7 +130,7 @@ public:
     }
 
     // 重载 a[] 操作符
-    char32_t operator[](size_t index) const {
+    Char operator[](size_t index) const {
         char8_t* cursor = p;
         for (size_t i = 0; i < index; ++i) {
             cursor += get_width(*cursor);
@@ -132,7 +140,7 @@ public:
 
     // 返回一个 UTF8 编码后的 Unicode
     // 并写入相应的地址
-    static void encode(const char32_t unicode, char8_t* ptr){
+    static void encode(Char unicode, pchar8 ptr){
         size_t length = 0;
         if (unicode <= 0x7F) {
             length = 1;

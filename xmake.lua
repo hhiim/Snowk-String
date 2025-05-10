@@ -6,7 +6,7 @@ add_includedirs("include/metaprogram")
 
 set_languages("c23", "c++23")
 add_cxxflags(
-    "-g","-W","-fpermissive", "-O3"
+    "-g","-w","-fpermissive"
 )
 
 
@@ -63,8 +63,8 @@ target_end()
 target("x64-test")
     set_arch("x64")
     set_basename("String")
-    set_toolchains("clang-19")
-    -- set_toolchains("gcc")
+    -- set_toolchains("clang-19")
+    set_toolchains("gcc")
     set_kind("binary")
     set_targetdir("bin/x64/test")
     add_files("test/*.cpp")

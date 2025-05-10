@@ -3,11 +3,10 @@
 
 #include <algorithm>
 #include <array>
-#include <bit>
 #include <cstddef>
-#include <iostream>
 #include <memory>
 #include <sys/cdefs.h>
+#include "interpret.h"
 
 
 namespace Dstring {
@@ -16,19 +15,6 @@ using std::is_convertible_v;
 using std::endian;
 using std::byte;
 
-template<size_t N>
-using bytes = std::array<byte, N>;
-#define become std::bit_cast
-
-// 拷贝反转函数
-template <size_t N> __always_inline
-auto reverse(const bytes<N>& x){
-    bytes<N> y;
-    std::reverse_copy(
-        x.begin(), x.end(),
-        y.begin()
-    ); return y;
-}
 
 //  字节序转换
 template<typename T, endian E = endian::native>
