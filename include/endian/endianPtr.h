@@ -2,6 +2,8 @@
 #define ENDIANPTR_H 
 
 #include <bit>
+#include <concepts>
+#include <cstddef>
 #include <iostream>
 #include <memory>
 #include "endianless.h"  //  NOLINT
@@ -64,7 +66,7 @@ public:
 };
 namespace{
     template <typename D, endian E>
-    void f(endianPtr<D,E> t){};
+    void f(endianPtr<D,E> _){};
 }
 template <typename T>
 concept isEndianPtr = requires(T t) { f(t); };
@@ -72,21 +74,26 @@ concept isEndianPtr = requires(T t) { f(t); };
 
 // 加减法运算符重载
 #define PTR endianPtr<D,E>
-    template <typename T, typename D, endian E>
+    template <integral T, typename D, endian E>
     PTR operator+(const PTR& lhs, T rhs)
-        {return PTR{lhs.ptr+rhs}; }
+        { return PTR{lhs.ptr+rhs}; }
 
-    template <typename T,typename D, endian E>
+    template <integral T,typename D, endian E>
     PTR operator+(T lhs, const PTR& rhs)
-        {return PTR{rhs.ptr+lhs}; }
+        { return PTR{rhs.ptr+lhs}; }
 
-    template <typename T, typename D, endian E>
+    template <integral T, typename D, endian E>
     PTR operator-(const PTR& lhs, T rhs)
-        {return PTR{lhs.ptr-rhs}; }
+        { return PTR{lhs.ptr-rhs}; }
 
-    template <typename T, typename D, endian E>
+    template <integral T, typename D, endian E>
     PTR operator-(T lhs, const PTR& rhs)
-        {return PTR{rhs.ptr-lhs}; }
+        { return PTR{rhs.ptr-lhs}; }
+
+    // 求指针之间字节距离
+    template <typename D, endian E>
+    size_t operator-(const PTR& lhs, const PTR& rhs)
+        { return lhs.ptr-rhs.ptr; }
 #undef PTR
 }
 #endif

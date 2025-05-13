@@ -19,10 +19,12 @@ public:
 
     pchar16 p;
     UTF16(char16_t* ptr) : p(ptr) {}
+    UTF16(void* ptr) : p((char16_t*)ptr) {}
     UTF16(pchar16 ptr) : p(ptr.ptr) {}
     UTF16(const UTF16& obj) : p(obj.p) {}
 
-    // ! 已修改
+    char16_t* data() { return p; }
+
     UTF16& operator++() {
         p += get_width(*p);
         return *this;
@@ -65,11 +67,13 @@ public:
             cursor += get_width(*cursor);
         } return sum;
     }
+
+    // 返回单元级长度
     size_t size() const {
         auto cursor = p;
         size_t sum = 0;
         while (*cursor != u'\0') {
-            sum += 2; // 每个 UTF-16 单元占 2 字节
+            sum ++;
             cursor++;
         }
         return sum;

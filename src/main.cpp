@@ -1,14 +1,16 @@
-#include "UTF8.h"
-#include "encode.h"
+#include "Dstring.hpp"
+
 #include <cassert>
+#include <cstddef>
+#include <new>
+#include <utility>
+#include <vector>
 using namespace Dstring;
 
 int main() {
-    UTF8 utf8((char8_t*)u8"Hello, World!");
-    assert(utf8[0] == U'H');
-    assert(utf8[1] == U'e');
-    assert(utf8[2] == U'l');
-    assert(utf8[3] == U'l');
-
-    static_assert(Encode<UTF8<>>);
+    char8_t s[] = 
+        u8"你好世界 你好世界 你好世界 你好世界 你好世界 你好世界 你好世界 你好世界"
+    ;
+    base::Dstring<UTF8> a(s);
+    return 0;
 }

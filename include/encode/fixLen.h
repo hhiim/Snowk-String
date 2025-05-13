@@ -22,6 +22,8 @@ protected:
     fixLen(){}
 public:
     endianPtr<T,E> p;
+    T* data(){ return p; }
+    
     fixLen& operator++() {
         p ++;
         return *this;
@@ -55,15 +57,17 @@ public:
         return (this->p) == other.p;
     }
 
-    size_t len(){
-        size_t len = 0;
-        while(*(p + len) != 0){
-            len ++;
-        } return len;
-    }
+    // 获取单元级大小（不包括结尾 0）
     size_t size(){
-        return len()*sizeof(T);
+        T* ptr = p;
+        size_t size = 0;
+        while(*(ptr + size) != 0){
+            size ++;
+        } return size;
     }
+
+    size_t len(){ return size(); }
+
 };
     
 

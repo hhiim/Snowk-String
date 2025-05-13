@@ -1,31 +1,61 @@
 [
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-W", "-fpermissive", "-O3", "-o", "build/.objs/mips/linux/mips/release/src/main.cpp.o", "src/main.cpp"],
+  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/mips/linux/mips/release/src/main.cpp.o", "src/main.cpp"],
   "file": "src/main.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-W", "-fpermissive", "-O3", "-o", "build/.objs/mips-test/linux/mips/release/test/catch_amalgamated.cpp.o", "test/catch_amalgamated.cpp"],
+  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/x64-test/linux/x64/release/test/catch_amalgamated.cpp.o", "test/catch_amalgamated.cpp"],
   "file": "test/catch_amalgamated.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-W", "-fpermissive", "-O3", "-o", "build/.objs/mips-test/linux/mips/release/test/UTF16.cpp.o", "test/UTF16.cpp"],
+  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/x64-test/linux/x64/release/test/ASCII.cpp.o", "test/ASCII.cpp"],
+  "file": "test/ASCII.cpp"
+},
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/x64-test/linux/x64/release/test/UTF8.cpp.o", "test/UTF8.cpp"],
+  "file": "test/UTF8.cpp"
+},
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/x64-test/linux/x64/release/test/UTF16.cpp.o", "test/UTF16.cpp"],
   "file": "test/UTF16.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-g", "-W", "-fpermissive", "-O3", "-o", "build/.objs/x64-test/linux/x64/release/test/catch_amalgamated.cpp.o", "test/catch_amalgamated.cpp"],
+  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/x64-test/linux/x64/release/test/UTF32.cpp.o", "test/UTF32.cpp"],
+  "file": "test/UTF32.cpp"
+},
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/mips-test/linux/mips/release/test/catch_amalgamated.cpp.o", "test/catch_amalgamated.cpp"],
   "file": "test/catch_amalgamated.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-g", "-W", "-fpermissive", "-O3", "-o", "build/.objs/x64-test/linux/x64/release/test/UTF16.cpp.o", "test/UTF16.cpp"],
+  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/mips-test/linux/mips/release/test/ASCII.cpp.o", "test/ASCII.cpp"],
+  "file": "test/ASCII.cpp"
+},
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/mips-test/linux/mips/release/test/UTF8.cpp.o", "test/UTF8.cpp"],
+  "file": "test/UTF8.cpp"
+},
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/mips-test/linux/mips/release/test/UTF16.cpp.o", "test/UTF16.cpp"],
   "file": "test/UTF16.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-g", "-W", "-fpermissive", "-O3", "-o", "build/.objs/x64/linux/x64/release/src/main.cpp.o", "src/main.cpp"],
+  "arguments": ["/usr/bin/mips-linux-gnu-g++-14", "-c", "-static", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-I/usr/mips-linux-gnu/include", "-I/usr/mips-linux-gnu/include/c++/14", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/mips-test/linux/mips/release/test/UTF32.cpp.o", "test/UTF32.cpp"],
+  "file": "test/UTF32.cpp"
+},
+{
+  "directory": "/home/knight/桌面/Projects/String",
+  "arguments": ["/usr/bin/clang-19", "-c", "-Qunused-arguments", "-m64", "-std=c++23", "-Iinclude", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-g", "-w", "-fpermissive", "-O3", "-flto", "-o", "build/.objs/x64/linux/x64/release/src/main.cpp.o", "src/main.cpp"],
   "file": "src/main.cpp"
 }]

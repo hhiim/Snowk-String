@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <concepts>
 #include <bitset>
+#include <sys/cdefs.h>
 
 
 template<size_t N>
@@ -27,28 +28,26 @@ C& interpret(bytes<N>& data){
     return *become<C*>(&data[0]);
 };
 
-// 位视图
+
 template<typename T, size_t N>
 struct BitView{
     bytes<N>& data;
-    constexpr BitView(T v){ data = v; }
-    
-    template<size_t M>
-    bool getter(){
-        constexpr size_t byteOffset = M / 8;
-        constexpr size_t bitOffset = M % 8;
-        char&  p = ((char*)&data)[byteOffset];
-        return (p >> bitOffset) & 1;
+    public:
+    constexpr BitView(T& v): data(*become<bytes<N>*>(&v)){}
+
+    bool getter(size_t M) noexcept {
+        const auto* ptr = reinterpret_cast<const unsigned char*>(data.data());
+        return (ptr[M/8] >> (M%8)) & 0x01;
     }
 
-    template<size_t M>
-    void setter(bool v){
-        constexpr size_t byteOffset = M / 8;
-        constexpr size_t bitOffset = M % 8;
-        char&  p = ((char*)&data)[byteOffset];
-        if(v) p |= 1 << bitOffset;
-        else p &= ~(1 << bitOffset);
+    __always_inline void setter(size_t M, bool v) noexcept {
+        auto* ptr = reinterpret_cast<unsigned char*>(data.data());
+        const unsigned mask = 1u << (M%8);
+        ptr[M/8] = v ? (ptr[M/8] | mask) : (ptr[M/8] & ~mask);
     }
 };
+template<typename T>
+BitView(T&) -> BitView<T, sizeof(T)>;
+
 
 #endif

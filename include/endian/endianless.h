@@ -87,13 +87,16 @@ public:
     }
 };
 
-// 判断是否属于 endianless
-namespace{
-    template <typename D, endian E>
-    void f(endianless<D,E> t){};
-}
+// endianless 萃取模板
+template <typename T> struct EndianLess;
+template <typename D, endian _E>
+struct EndianLess<endianless<D,_E>>{
+    using Type = D;
+    static constexpr auto E = _E;
+};
+
 template <typename T>
-concept isEndianless = requires(T t) { f(t); };
+concept isEndianless = requires { EndianLess<T>{}; };
 
 # include "operations.h"
 
@@ -106,6 +109,8 @@ placeOp(&=); placeOp(|=); placeOp(^=); placeOp(%=);
 
 cmpOp(==); cmpOp(<);  cmpOp(>);
 cmpOp(!=); cmpOp(<=); cmpOp(>=);
+
+
 
 };
 

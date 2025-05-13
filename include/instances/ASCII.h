@@ -17,6 +17,7 @@ public:
     typedef endianPtr<char, E> pachar;
 
     ASCII(char* ptr)         { this->p.ptr = ptr; }
+    ASCII(void* ptr)         { this->p = (char*)ptr; }
     ASCII(pachar ptr)        { this->p = ptr; }
     ASCII (const ASCII &obj) { this->p = obj.p; }
 

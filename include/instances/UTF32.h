@@ -14,6 +14,7 @@ public:
     typedef endianPtr<char32_t, E> pChar;
 
     UTF32(char32_t* ptr)     { this->p.ptr = ptr; }
+    UTF32(void* ptr)         { this->p.ptr = (char32_t*)ptr; }
     UTF32(pChar ptr)         { this->p = ptr; }
     UTF32 (const UTF32 &obj) { this->p = obj.p; }
 

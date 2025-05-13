@@ -17,8 +17,11 @@ public:
 
     pchar8 p;
     UTF8(char8_t* ptr) : p(ptr) {}
+    UTF8(void* ptr) : p((char8_t*)ptr) {}
     UTF8(pchar8 ptr) : p(ptr.ptr) {}
     UTF8(const UTF8& obj) : p(obj.p) {}
+
+    char8_t* data() { return p; }
 
     UTF8& operator++() {
         p += get_width(*p);
@@ -64,7 +67,7 @@ public:
         return sum;
     }
 
-    // 获取字节级长度 ( 不包括 \0 )
+    // 获取单元级长度 ( 不包括 \0 )
     size_t size(){
         char8_t* cursor = p;
         size_t sum = 0;
@@ -171,7 +174,6 @@ public:
             utf8[3] = static_cast<char8_t>(0x80 | (unicode & 0x3F));
         }
     }
-
 
 };
 

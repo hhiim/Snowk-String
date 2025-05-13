@@ -4,5 +4,6 @@
 #include <memory>
 #include "endianless.h"
 #include "endianPtr.h"
+#include <concepts>
 
 #endif
