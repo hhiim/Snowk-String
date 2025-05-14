@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-namespace Dstring::internal {
+namespace Snowk::internal {
 
 template <typename T> struct getEndian;
 template <template <endian> class Template, endian Arg>

@@ -38,13 +38,13 @@
 #pragma  once
 #include "Dstring.hpp"
 
-namespace Dstring{
+namespace Snowk{
     template<typename T> struct Convert;
 
     template<
         template <endian> typename strPtr,
         endian E, Config C>
-    struct Convert<Dstring<strPtr, E, C>>{
+    struct Convert<string<strPtr, E, C>>{
 
     };
 };

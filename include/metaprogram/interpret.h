@@ -5,7 +5,7 @@
 #include <bitset>
 #include <sys/cdefs.h>
 
-namespace Dstring::internal{
+namespace Snowk::internal{
 
     template<size_t N>
     using bytes = std::array<std::byte, N>;

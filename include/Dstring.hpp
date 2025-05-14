@@ -1,13 +1,14 @@
 #pragma  once
+
 #include "encode.h"
 #include "instances/UTF8.h"
 #include "instances/UTF16.h"
 #include "instances/UTF32.h"
 #include "instances/ASCII.h"
-// #include "convert.h"
+// #include "Convert.hpp"
 
 
-namespace Dstring{
+namespace Snowk{
     using namespace std;
     using pmr::memory_resource;
     using pmr::new_delete_resource;
@@ -21,7 +22,7 @@ template <
     endian E = endian::native,          // 字符串字节序
     Config config = defaultConfig       // 默认扩容策略
 > requires Encode<strPtr>
-class Dstring {
+class string {
 private:
     using code = strPtr<E>;
     using unit = Unit<code>;
@@ -68,7 +69,7 @@ private:
 public:
     // 以 '\0' 判断结尾
     template<bool inplace = false>
-    Dstring(auto* s, memory_resource* resource = alloc()){
+    string(auto* s, memory_resource* resource = alloc()){
         if constexpr(inplace){
             sso.setSSO(false);
             comm.resource = resource;
@@ -99,7 +100,7 @@ public:
     };
     // 手动输入长度
     template<bool inplace = false>
-    Dstring(
+    string(
         auto* s, size_t size, memory_resource* resource = alloc()){
         if constexpr(inplace){
             sso.setSSO(false);
@@ -153,7 +154,7 @@ public:
         return ptr + size();
     };
 
-    ~Dstring(){
+    ~string(){
         SSOreload([](){}, [&](){
             this->comm.resource->deallocate(
                 this->comm.data.data(),

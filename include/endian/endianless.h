@@ -11,7 +11,7 @@
 #include "logic.h"
 
 
-namespace Dstring::internal {
+namespace Snowk::internal {
 
 using std::is_convertible_v;
 using std::endian;

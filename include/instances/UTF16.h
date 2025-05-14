@@ -3,7 +3,7 @@
 #include "static_cast.h"
 
 
-namespace Dstring::internal {
+namespace Snowk::internal {
 using namespace std;
 
 template<endian E = endian::native>

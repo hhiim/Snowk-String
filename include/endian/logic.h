@@ -3,7 +3,7 @@
 
 #include <bit>
 
-namespace Dstring {
+namespace Snowk {
 using namespace std;
 
 constexpr endian operator!(endian obj){

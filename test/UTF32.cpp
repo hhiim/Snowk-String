@@ -6,8 +6,8 @@
 #include <iostream>
 #include <tuple>
 using namespace std;
-using namespace Dstring;
-using namespace Dstring::internal;
+using namespace Snowk;
+using namespace Snowk::internal;
 
 TEST_CASE("UTF32"){
     const auto [input, expected,length] = GENERATE(

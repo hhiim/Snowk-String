@@ -8,7 +8,7 @@
 #include <memory>
 #include "endianless.h"  //  NOLINT
 
-namespace Dstring::internal{
+namespace Snowk::internal{
 using namespace std;
 
 // 端序无关指针

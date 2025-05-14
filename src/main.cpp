@@ -6,7 +6,6 @@
 #include <new>
 #include <utility>
 #include <vector>
-using namespace Dstring;
 
 int main() {
 }

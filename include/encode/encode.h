@@ -5,9 +5,9 @@
 #include <sys/cdefs.h>
 #include <type_traits>
 
-namespace Dstring {
+namespace Snowk {
     using namespace std;
-    using namespace Dstring::internal;
+    using namespace Snowk::internal;
     using unicode = char32_t;
 
     // 每一个特定的编码方式，是一种指针

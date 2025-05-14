@@ -4,7 +4,7 @@
 #include "encode/fixLen.h"
 
 
-namespace Dstring::internal {
+namespace Snowk::internal {
 using namespace std;
 
 template<endian E = endian::native>

@@ -4,8 +4,8 @@
 #include <iostream>
 #include "catch_amalgamated.hpp"
 using namespace std;
-using namespace Dstring;
-using namespace Dstring::internal;
+using namespace Snowk;
+using namespace Snowk::internal;
 
 TEST_CASE("ASCII"){
     const auto [input, expected,length] = GENERATE(
