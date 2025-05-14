@@ -1,11 +1,9 @@
-#ifndef UTF_16_H
-#define UTF_16_H
-
+#pragma oonce
 #include "common.h"
 #include "static_cast.h"
 
 
-namespace Dstring {
+namespace Dstring::internal {
 using namespace std;
 
 template<endian E = endian::native>
@@ -89,7 +87,7 @@ public:
     static size_t get_width(char16 unit) {
         if (unit < 0xD800 || unit > 0xDFFF) return 1; // BMP 字符
         if (unit >= 0xD800 && unit <= 0xDBFF) return 2; // 高位代理
-        return 1; // 无效或低位代理
+        // 错误，触发未定义行为
     }
 
     static Char decode(pchar16 p) {
@@ -115,6 +113,13 @@ public:
         return decode(cursor);
     }
 
+    static size_t encode_width(Char unicode) {
+        if (unicode <= 0xFFFF)
+        { return 2; }
+        else if (unicode <= 0x10FFFF)
+        { return 4; };
+    }
+
     static void encode(Char unicode, pchar16 ptr) {
         if (unicode <= 0xFFFF) { // BMP 字符
             ptr[0] = static_cast<char16>(unicode);
@@ -129,4 +134,3 @@ public:
 } // namespace Dstring
 
 #undef static_cast
-#endif

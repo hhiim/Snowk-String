@@ -3,18 +3,19 @@
 
 #include <algorithm>
 #include <array>
+#include <bit>
 #include <cstddef>
 #include <memory>
 #include <sys/cdefs.h>
 #include "interpret.h"
+#include "logic.h"
 
 
-namespace Dstring {
+namespace Dstring::internal {
 
 using std::is_convertible_v;
 using std::endian;
 using std::byte;
-
 
 //  字节序转换
 template<typename T, endian E = endian::native>
@@ -25,15 +26,19 @@ __always_inline auto endianCons(T& data) {
     if constexpr (E == endian::native) {
         std::copy(
             source, source+size,
-            target.begin()
-        );
+            target.begin());
     }else {
         std::reverse_copy(
             source, source+size,
-            target.begin()
-        );
+            target.begin());
     } return target;
 }
+
+template<typename T>
+__always_inline auto reverseCons(T& data) {
+    return endianCons<T, !endian::native>(data);
+}
+
 
 // 端序无关数据类型（显示指明读写端序）
 template <typename T, endian E = endian::native>
@@ -69,7 +74,12 @@ public:
         }
     }
 
-    // 强制转换
+    template<typename D>
+    __always_inline  operator endianless<D, !E>() const{
+        auto temp = reverseCons<D>(get());
+        return endianless<D, !E>(interpret<T>(temp));
+    }
+
     template<typename U>
     __always_inline  operator U() const{
         if constexpr (is_convertible_v<U,T>) {

@@ -1,12 +1,10 @@
-#ifndef ASCII_H
-#define ASCII_H
-
+#pragma oonce
 #include <iostream>
 #include <memory>
 #include "encode/fixLen.h"
 
 
-namespace Dstring {
+namespace Dstring::internal {
 using namespace std;
 
 template<endian E = endian::native>
@@ -33,5 +31,3 @@ public:
 };
 
 }
-
-#endif

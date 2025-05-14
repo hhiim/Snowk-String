@@ -7,6 +7,7 @@
 #include <tuple>
 using namespace std;
 using namespace Dstring;
+using namespace Dstring::internal;
 
 TEST_CASE("UTF32"){
     const auto [input, expected,length] = GENERATE(

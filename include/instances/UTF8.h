@@ -1,9 +1,7 @@
-#ifndef UTF_8_H
-#define UTF_8_H
-
+#pragma oonce
 #include "common.h"
 
-namespace Dstring {
+namespace Dstring::internal {
 using namespace std;
 
 template<endian E = endian::native>
@@ -141,22 +139,23 @@ public:
         return decode(cursor);
     }
 
+
+    static size_t encode_width(Char unicode) {
+        if (unicode <= 0x7F) {
+            return 1;
+        } else if (unicode <= 0x7FF) {
+            return 2;
+        } else if (unicode <= 0xFFFF) {
+            return 3;
+        } else if (unicode <= 0x10FFFF) {
+            return 4;
+        }
+    }
+
     // 返回一个 UTF8 编码后的 Unicode
     // 并写入相应的地址
     static void encode(Char unicode, pchar8 ptr){
-        size_t length = 0;
-        if (unicode <= 0x7F) {
-            length = 1;
-        } else if (unicode <= 0x7FF) {
-            length = 2;
-        } else if (unicode <= 0xFFFF) {
-            length = 3;
-        } else if (unicode <= 0x10FFFF) {
-            length = 4;
-        } else {
-            return;
-        }
-
+        size_t length = encode_width(unicode);
         char8_t* utf8 = ptr;
         if (length == 1) {
             utf8[0] = static_cast<char8_t>(unicode);
@@ -178,5 +177,3 @@ public:
 };
 
 }
-
-#endif

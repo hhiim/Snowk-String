@@ -7,8 +7,7 @@
 #include <tuple>
 using namespace std;
 using namespace Dstring;
-
-// static_assert(endian::native == endian::little);
+using namespace Dstring::internal;
 
 TEST_CASE("UTF16"){
     const auto [input, expected,length] = GENERATE(

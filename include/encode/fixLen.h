@@ -4,7 +4,7 @@
 #include "common.h"
 #include "metaprogram/functional.h"
 
-namespace Dstring {
+namespace Dstring::internal {
 
 template <typename T> struct getEndian;
 template <template <endian> class Template, endian Arg>

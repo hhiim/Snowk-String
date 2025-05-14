@@ -1,6 +1,4 @@
-#ifndef ENCODE_H
-#define ENCODE_H
-
+#pragma oonce
 #include "common.h"
 #include "endianless.h"
 #include <cstddef>
@@ -9,6 +7,7 @@
 
 namespace Dstring {
     using namespace std;
+    using namespace Dstring::internal;
     using unicode = char32_t;
 
     // 每一个特定的编码方式，是一种指针
@@ -54,5 +53,3 @@ namespace Dstring {
     };
 
 };
-
-# endif

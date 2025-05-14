@@ -1,24 +1,10 @@
-#ifndef Dstring_H
-#define Dstring_H
-#include <cassert>
-#include <concepts>
-#define Constexpr static constexpr auto
-
-
-#include <algorithm>
-#include <cstddef>
-#include <memory>
-#include <memory_resource>
-#include <sys/cdefs.h>
-
-#include "endianless.h"
+#pragma  once
 #include "encode.h"
 #include "instances/UTF8.h"
 #include "instances/UTF16.h"
 #include "instances/UTF32.h"
 #include "instances/ASCII.h"
-#include "interpret.h"
-
+#include "Convert.hpp"
 
 
 namespace Dstring :: base{
@@ -114,9 +100,7 @@ public:
     // 手动输入长度
     template<bool inplace = false>
     Dstring(
-        auto* s, size_t size,
-        memory_resource* resource = alloc())
-    {
+        auto* s, size_t size, memory_resource* resource = alloc()){
         if constexpr(inplace){
             sso.setSSO(false);
             comm.resource = resource;
@@ -142,8 +126,33 @@ public:
     };
     
 
-    strPtr<E> begin(){};
-    strPtr<E> end(){};
+    // 指针以及迭代器
+    unit* data(){
+        return SSOreload(
+            [&](){ return sso.data; },
+            [&](){ return comm.data.data(); }
+        );
+    };
+
+    size_t size(){
+        return SSOreload(
+            [&](){ return sso.getSize(); },
+            [&](){ return comm.size; }
+        );
+    };
+
+    strPtr<E> begin(){
+        return SSOreload(
+            [&](){ return sso.data; },
+            [&](){ return comm.data; }
+        );
+    };
+
+    strPtr<E> end(){
+        unit* ptr = data();
+        return ptr + size();
+    };
+
     ~Dstring(){
         SSOreload([](){}, [&](){
             this->comm.resource->deallocate(
@@ -158,4 +167,3 @@ public:
 
 #undef remaining
 #undef Constexpr
-#endif

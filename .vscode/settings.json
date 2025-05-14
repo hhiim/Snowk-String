@@ -40,8 +40,8 @@
         ".clangd": false,
         "**/compile_commands.json": true,
         ".clang-tidy": true,
-        "test/catch_amalgamated.cpp": true,
-        "test/catch_amalgamated.hpp": true
+        "test/catch_amalgamated.cpp": false,
+        "test/catch_amalgamated.hpp": false
     },
     "explorerExclude.backup": {},
 }

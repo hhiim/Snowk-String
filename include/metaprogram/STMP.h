@@ -1,6 +1,4 @@
-#ifndef STMP_H
-#define STMP_H
-
+#pragma oonce
 #include <concepts>
 #include <type_traits>
 #include <memory>
@@ -25,6 +23,3 @@ consteval auto next() {
         return next<N + 1>();
     }
 }
-
-
-#endif

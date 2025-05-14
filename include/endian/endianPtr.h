@@ -8,7 +8,7 @@
 #include <memory>
 #include "endianless.h"  //  NOLINT
 
-namespace Dstring{
+namespace Dstring::internal{
 using namespace std;
 
 // 端序无关指针
@@ -45,6 +45,13 @@ public:
     }
     Content& operator[](int i){
         return *reinterpret_cast<Content*>(ptr+i);
+    }
+    
+    bool operator==(const endianPtr& rhs) const{
+        return ptr == rhs.ptr;
+    }
+    bool operator!=(const endianPtr& rhs) const{
+        return ptr != rhs.ptr;
     }
 
     Content* operator->()
@@ -96,4 +103,5 @@ concept isEndianPtr = requires(T t) { f(t); };
         { return lhs.ptr-rhs.ptr; }
 #undef PTR
 }
+
 #endif

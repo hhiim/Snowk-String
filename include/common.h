@@ -1,9 +1,14 @@
-#ifndef COMMON_H
-#define COMMON_H 
+#pragma oonce
 
+#define Constexpr static constexpr auto
+
+#include <algorithm>
+#include <cstddef>
 #include <memory>
-#include "endianless.h"
-#include "endianPtr.h"
+#include <memory_resource>
+#include <sys/cdefs.h>
+#include <cassert>
 #include <concepts>
 
-#endif
+#include "endianless.h"
+#include "endianPtr.h"

@@ -1,6 +1,4 @@
-#ifndef FUNCTIONAL_H
-#define FUNCTIONAL_H
-
+#pragma oonce
 #include <functional>
 #include <tuple>
 
@@ -8,11 +6,6 @@
     [](auto&& ...arg){    \
         return F(arg...); \
     }                     \
-
-template<typename F,class...Args>
-auto foo(F f,Args&&...args) {
-    return f(std::forward<Args>(args)...);
-}
 
 template <typename T>
 struct funcTraits;
@@ -38,5 +31,3 @@ struct funcTraits<R (C::*)(Args...)> {
 template <typename R, typename C, typename... Args>
 struct funcTraits<R (C::*)(Args...) const> :
     funcTraits<R (C::*)(Args...)> {};
-
-#endif

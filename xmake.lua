@@ -7,8 +7,7 @@ add_includedirs("include/metaprogram")
 set_languages("c23", "c++23")
 add_cxxflags(
     "-g","-w","-fpermissive",
-    -- "-march=native",
-    -- "-O3",
+    "-O3",
     {force = true}
 )
 
@@ -72,6 +71,7 @@ target("x64-test")
 
     -- set_toolchains("clang-19")
     set_toolchains("gcc-14")
+    add_cxxflags("-O3", "-march=native", "-flto")
 
     set_kind("binary")
     set_targetdir("bin/x64/test")

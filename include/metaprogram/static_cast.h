@@ -1,6 +1,4 @@
-#ifndef STATIC_CAST_H
-#define STATIC_CAST_H
-
+#pragma oonce
 #include <concepts>
 
 template<typename T>
@@ -19,6 +17,5 @@ auto _static_cast(auto&& obj){
         return obj.template staticCast<T>();
     else return static_cast<T>(obj);
 }
-#endif
 
 # define static_cast _static_cast

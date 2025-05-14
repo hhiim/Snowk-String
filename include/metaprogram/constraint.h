@@ -1,5 +1,4 @@
-#ifndef CONSTRAINT_H
-#define CONSTRAINT_H
+#pragma oonce
 
 #include <concepts>
 #include <type_traits>
@@ -29,5 +28,3 @@ concept Ft = std::same_as<F, False<false>>;
 constexpr bool IF(bool p, bool q){
     return !p || q;
 }
-
-#endif

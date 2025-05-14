@@ -5,6 +5,7 @@
 #include "catch_amalgamated.hpp"
 using namespace std;
 using namespace Dstring;
+using namespace Dstring::internal;
 
 TEST_CASE("ASCII"){
     const auto [input, expected,length] = GENERATE(

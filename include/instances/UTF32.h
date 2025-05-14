@@ -1,10 +1,8 @@
-#ifndef UTF_32_H
-#define UTF_32_H
-
+#pragma oonce
 #include "common.h"
 #include "fixLen.h"
 
-namespace Dstring {
+namespace Dstring::internal {
 using namespace std;
 
 template<endian E = endian::native>
@@ -30,6 +28,3 @@ public:
 };
 
 }
-
-
-#endif
