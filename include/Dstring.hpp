@@ -4,10 +4,10 @@
 #include "instances/UTF16.h"
 #include "instances/UTF32.h"
 #include "instances/ASCII.h"
-#include "Convert.hpp"
+// #include "convert.h"
 
 
-namespace Dstring :: base{
+namespace Dstring{
     using namespace std;
     using pmr::memory_resource;
     using pmr::new_delete_resource;

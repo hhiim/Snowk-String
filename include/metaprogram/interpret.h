@@ -6,6 +6,7 @@
 #include <sys/cdefs.h>
 
 namespace Dstring::internal{
+
     template<size_t N>
     using bytes = std::array<std::byte, N>;
     #define become std::bit_cast

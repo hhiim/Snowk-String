@@ -35,10 +35,17 @@
     //     static_assert(!is_same_v<strPtr0<E>, strPtr<E>>);
     // }
 
-#ifndef CONVERT_HPP
-#define CONVERT_HPP
 #pragma  once
-
 #include "Dstring.hpp"
 
-#endif
+namespace Dstring{
+    template<typename T> struct Convert;
+
+    template<
+        template <endian> typename strPtr,
+        endian E, Config C>
+    struct Convert<Dstring<strPtr, E, C>>{
+
+    };
+};
+

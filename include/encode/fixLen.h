@@ -2,7 +2,6 @@
 #define FIXLEN_H
 
 #include "common.h"
-#include "metaprogram/functional.h"
 
 namespace Dstring::internal {
 
