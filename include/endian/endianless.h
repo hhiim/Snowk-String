@@ -77,7 +77,7 @@ public:
     template<typename D>
     __always_inline  operator endianless<D, !E>() const{
         auto temp = reverseCons<D>(get());
-        return endianless<D, !E>(interpret<T>(temp));
+        return endianless<D, !E>(temp);
     }
 
     template<typename U>

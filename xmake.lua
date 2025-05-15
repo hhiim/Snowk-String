@@ -3,86 +3,44 @@ add_includedirs("include/encode")
 add_includedirs("include/endian")
 add_includedirs("include/instances")
 add_includedirs("include/metaprogram")
-
 set_languages("c23", "c++23")
+
 add_cxxflags(
     "-g","-w","-fpermissive",
-    "-O3",
+    -- "-O3", "-march=native",
     {force = true}
 )
 
-
-
-toolchain("mips")
-    set_kind("standalone")
-    -- 设置编译器和工具链
-    set_toolset("cxx", "mips-linux-gnu-g++-14")
-    set_toolset("cc", "mips-linux-gnu-gcc-14")
-    set_toolset("ar", "mips-linux-gnu-ar")
-    set_toolset("as", "mips-linux-gnu-as")
-    set_toolset("ranlib", "mips-linux-gnu-ranlib")
-    set_toolset("strip", "mips-linux-gnu-strip")
-    set_toolset("ld", "mips-linux-gnu-g++-14")
-    -- 设置库和头文件路径
-    add_linkdirs("/usr/mips-linux-gnu/lib/")
-    add_includedirs("/usr/mips-linux-gnu/include")
-    add_includedirs("/usr/mips-linux-gnu/include/c++/14/")
-
-    -- 设置编译器选项
-    add_cxxflags("-static")
-    add_ldflags("-static", {force = true})
-toolchain_end()
-
--- 可执行文件构建
-target("mips")
-    set_arch("mips")
-    set_basename("String")
-    set_toolchains("mips")
-    set_kind("binary")
-    set_targetdir("bin/mips")
-    add_files("src/*.cpp")
-target_end()
-
-target("x64")
+target("Snowk-String")
+    set_default(true)
+    set_kind("headeronly")
     set_arch("x64")
-    set_basename("String")
-
-    -- set_toolchains("clang-19")
+    set_basename("Snowk-String")
+    add_includedirs("include", {public = true})
     set_toolchains("gcc-14")
-
-    set_kind("binary")
     set_targetdir("bin/x64")
+target_end()
+
+
+target("main")
     add_files("src/*.cpp")
+    add_deps("Snowk-String")           -- 依赖主库
+    set_default(false)                 -- 不默认构建
+    on_install(function (target) end)  -- 空安装函数，不安装
 target_end()
 
--- 测试构建
-target("mips-test")
-    set_arch("mips")
-    set_basename("String")
-    set_toolchains("mips")
-    set_kind("binary")
-    set_targetdir("bin/mips/test")
-    add_files("test/*.cpp")
-target_end()
-
-target("x64-test")
+target("Snowk-String-test")
+    set_default(false)
     set_arch("x64")
     set_basename("String")
-
-    -- set_toolchains("clang-19")
     set_toolchains("gcc-14")
-    add_cxxflags("-O3", "-march=native", "-flto")
-
     set_kind("binary")
     set_targetdir("bin/x64/test")
     add_files("test/*.cpp")
-target_end()
 
-task("taskB")
-    on_run(function ()
-        os.exec("xmake build x64-test") -- 显式调用前置任务
-        os.exec("xmake build mips-test") -- 显式调用前置任务
-    end)
+    add_deps("Snowk-String")           -- 依赖主库
+    set_default(false)                 -- 不默认构建
+    on_install(function (target) end)  -- 空安装函数，不安装
 target_end()
 
 

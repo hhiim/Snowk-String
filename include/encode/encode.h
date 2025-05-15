@@ -1,4 +1,7 @@
-#pragma oonce
+#ifndef  ENCODE_H
+#define  ENCODE_H
+#pragma once
+
 #include "common.h"
 #include "endianless.h"
 #include <cstddef>
@@ -53,3 +56,5 @@ namespace Snowk {
     };
 
 };
+
+#endif

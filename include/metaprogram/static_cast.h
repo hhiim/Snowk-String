@@ -1,4 +1,4 @@
-#pragma oonce
+#pragma once
 #include <concepts>
 
 template<typename T>

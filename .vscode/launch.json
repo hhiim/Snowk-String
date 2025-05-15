@@ -9,39 +9,11 @@
             "args": [],
             "cwd": "${workspaceFolder}"
         },
-        // {
-        //     "name": "MIPS Debug",
-        //     "type": "cppdbg",
-        //     "request": "launch",
-        //     "program": "${workspaceRoot}/bin/mips/String",
-        //     "stopAtEntry": false,
-        //     "cwd": "${workspaceFolder}",
-        //     "externalConsole": false,
-        //     "MIMode": "gdb",
-        //     "miDebuggerPath": "gdb-multiarch",
-        //     "miDebuggerServerAddress": "localhost:12345",
-        //     "setupCommands": [
-        //         {
-        //             "text": "-enable-pretty-printing",
-        //             "ignoreFailures": true
-        //         },
-        //         {
-        //             "text": "set arch mips",
-        //             "ignoreFailures": true
-        //         },
-        //         {
-        //             "text": "set endian big",
-        //             "ignoreFailures": true
-        //         }
-        //     ],
-        //     "preLaunchTask": "run",
-        // },
-
         {
             "name": "x64 Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/bin/x64/String",
+            "program": "${workspaceRoot}/build/linux/x86_64/release/main",
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "externalConsole": false,

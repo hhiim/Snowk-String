@@ -1,4 +1,4 @@
-#pragma oonce
+#pragma once
 #include "common.h"
 
 namespace Snowk::internal {

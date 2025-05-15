@@ -1,4 +1,5 @@
 #include "UTF16.h"
+#include "string.hpp"
 #include "catch_amalgamated.hpp"
 #include "endianPtr.h"
 #include "endianless.h"
@@ -32,6 +33,13 @@ TEST_CASE("UTF16"){
             UTF16<>::encode(expected[i], out);
             auto r = UTF16(out);
             bool test = (*r == expected[i]);
+            CHECK(test);
+        }
+    }
+    SECTION("index"){
+        auto str = Snowk::string<UTF16>((char16_t*)input);
+        for(int i = 0; i < length; i++){
+            bool test = str[i] == expected[i];
             CHECK(test);
         }
     }

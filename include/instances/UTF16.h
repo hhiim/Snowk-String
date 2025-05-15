@@ -1,4 +1,4 @@
-#pragma oonce
+#pragma once
 #include "common.h"
 #include "static_cast.h"
 

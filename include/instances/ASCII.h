@@ -1,4 +1,4 @@
-#pragma oonce
+#pragma once
 #include <iostream>
 #include <memory>
 #include "encode/fixLen.h"

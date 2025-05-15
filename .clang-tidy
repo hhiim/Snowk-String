@@ -1,6 +1,8 @@
 Checks: 
   'modernize-*
-  -modernize-use-trailing-return-type'
+  -modernize-use-trailing-return-type
+  -clang-diagnostic-unused-variable,
+  -clang-analyzer-deadcode.DeadStores'
 
 WarningsAsErrors: ''
 HeaderFilterRegex: '.*catch.*'

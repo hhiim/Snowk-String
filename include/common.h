@@ -1,4 +1,4 @@
-#pragma oonce
+#pragma once
 #define Constexpr static constexpr auto
 
 #include <algorithm>

@@ -1,4 +1,5 @@
 #include "UTF32.h"
+#include "string.hpp"
 #include "catch_amalgamated.hpp"
 #include "endianPtr.h"
 #include "endianless.h"
@@ -32,6 +33,18 @@ TEST_CASE("UTF32"){
             UTF32<>::encode(expected[i], out);
             auto r = UTF32(out);
             bool test = (*r == expected[i]);
+            CHECK(test);
+        }
+    }
+    SECTION("index"){
+        const auto [input, expected,length] = GENERATE(
+            tuple{U"Hello World!"       , U"Hello World!"      , 12},
+            tuple{U"你好，世界！"       , U"你好，世界！"      , 6},
+            tuple{U"∀∂∃∈∉∋∏∑⨌", U"∀∂∃∈∉∋∏∑⨌", 9}
+        );
+        auto str = Snowk::string<UTF32>((char32_t*)input);
+        for(int i = 0; i < length; i++){
+            bool test = str[i] == expected[i];
             CHECK(test);
         }
     }

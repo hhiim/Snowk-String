@@ -1,5 +1,7 @@
 #include "ASCII.h"
+#include "string.hpp"
 #include <bit>
+#include <string>
 #include <tuple>
 #include <iostream>
 #include "catch_amalgamated.hpp"
@@ -28,6 +30,13 @@ TEST_CASE("ASCII"){
             ASCII<>::encode(expected[i], out);
             auto r = ASCII(out);
             bool test = (*r == expected[i]);
+            CHECK(test);
+        }
+    }
+    SECTION("index"){
+        auto str = Snowk::string<ASCII>((char*)input);
+        for(int i = 0; i < length; i++){
+            bool test = str[i] == expected[i];
             CHECK(test);
         }
     }
