@@ -82,7 +82,7 @@ add_repositories("private-repo private-repo")
 
 
 ### 质量保证
-- [ ] 完善 Cathat2 单元测试
+- [ ] 完善 Catch2 单元测试
 - [ ] 实现代码覆盖率检测
 - [ ] 完善文档注释（Doxygen）
 
