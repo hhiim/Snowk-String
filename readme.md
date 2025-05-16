@@ -56,12 +56,12 @@ include/
 
 ```python
 your-project
-  - private-repo
-    - packages
-      - s/snowk-string
-      - ... # 更多依赖
-    # 你自己的源代码
-  - xmake.lua
+├── private-repo
+│   └── packages
+│         ├── s/snowk-string
+│         ├── ... # 更多依赖
+│   # 你自己的源代码
+└── xmake.lua
 ```
 切换回 Snowk-String 源代码根目录，  
 执行 `xmake package`，将 `/build/packages/...`  
