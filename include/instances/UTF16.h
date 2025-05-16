@@ -131,6 +131,5 @@ public:
     }
 };
 
-} // namespace Dstring
-
+}
 #undef static_cast

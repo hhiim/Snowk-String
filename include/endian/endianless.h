@@ -74,13 +74,13 @@ public:
         }
     }
 
-    template<typename D>
-    __always_inline  operator endianless<D, !E>() const{
-        auto temp = reverseCons<D>(get());
-        return endianless<D, !E>(temp);
+    __always_inline  operator endianless<T, !E>() const{
+        auto temp = reverseCons<T>(get());
+        return endianless<T, !E>(temp);
     }
 
     template<typename U>
+    requires (!is_same_v<U, endianless<T, !E>>)
     __always_inline  operator U() const{
         if constexpr (is_convertible_v<U,T>) {
             return static_cast<U>(get());
@@ -119,8 +119,6 @@ placeOp(&=); placeOp(|=); placeOp(^=); placeOp(%=);
 
 cmpOp(==); cmpOp(<);  cmpOp(>);
 cmpOp(!=); cmpOp(<=); cmpOp(>=);
-
-
 
 };
 
