@@ -35,7 +35,7 @@
         "**/Thumbs.db": true,
         ".xmake": true,
         "bin": false,
-        "build": true,
+        "build": false,
         ".cache": true,
         ".clangd": true,
         "**/compile_commands.json": true,
