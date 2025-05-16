@@ -2,6 +2,7 @@
 
 [![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/about/)
 [![C++](https://img.shields.io/badge/C++-23-blue.svg)](https://isocpp.org/)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/hhiim/Snowk-String)
 
 C++ 端序无关字符串库，属于 Snowk 项目的一部分。  
 目前功能还不完善，**搜索、替换、比较、截取、拼接、格式化、正则表达式** 功能还不存在，  
