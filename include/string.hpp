@@ -203,8 +203,59 @@ public:
 
     // 拷贝构造函数（编码不同）
     template<template <endian> typename strPtr0, endian E0, Config C0>
-    string(string<strPtr0, E0, C0> &&obj){
+    requires (!std::is_same_v<strPtr0<E0>, strPtr<E0>>)
+    string (
+        string<strPtr0, E0, C0> &obj,
+        memory_resource* resource = alloc()
+    ){
+        size_t r = 0;
+        for(auto c: obj) { r += code::encode_width(c); }
+        bool couldSSO = (r <= remaining * unisize);
+        endianPtr<unit, E> ptr = nullptr;
 
+        if(couldSSO){
+            sso.setSSO(true);
+            size_t obj_unisize = sizeof(obj.sso.data[0]);
+            sso.setSize(r/unisize);
+            ptr = endianPtr<unit, E>(sso.data);
+        }else{
+            sso.setSSO(false);
+            comm.size = r/unisize;
+            comm.capacity = C::capacity(comm.size);
+            comm.resource = resource;
+            ptr = endianPtr<unit, E>(resource->allocate(comm.size*unisize));
+        }
+        // TODO：对于兼容的编码（如UTF-8 和 ASCII），可以优化为直接拷贝
+        for(auto c: obj) {
+            code::encode(c, ptr);
+            ptr += code::encode_width(c) / unisize;
+        }
+    };
+
+    // 移动构造函数（编码/端序相同 && 不使用 SSO）
+    template<Config C0> string (
+        string<strPtr, E, C0> &&obj,
+        memory_resource* resource = alloc()
+    ){
+        obj.SSOreload([&](){
+            sso.setSSO(true);
+            auto size = obj.sso.getSize();
+            sso.setSize(size);
+            std::copy(obj.sso.data, obj.sso.data + size, sso.data);
+        },[&](){
+            sso.setSSO(false);
+            comm.capacity = obj.comm.capacity;
+            comm.size = obj.comm.size;
+            comm.data = obj.comm.data;
+            obj.comm.data = code(nullptr);
+        });
+    };
+
+    // std::cout 支持
+    friend std::ostream& operator<<(std::ostream& os, string& str){
+        auto u8str = string<UTF8>(str);
+        os  << (char*)u8str.data();
+        return os;
     };
 };
 

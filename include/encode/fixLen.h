@@ -67,6 +67,11 @@ public:
 
     size_t len(){ return size(); }
 
+    constexpr __always_inline 
+    size_t encode_width(Char){
+        return sizeof(T);
+    }
+
 };
     
 
