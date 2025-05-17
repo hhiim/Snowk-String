@@ -19,7 +19,17 @@ public:
     static Char decode(pChar p) {
         return *p;
     }
-    
+
+    // 等于和不等于
+    template<template<endian>typename Temp, endian E0>
+    bool operator==(const Temp<E0> &obj) {
+        if constexpr(E0==E){
+            return *this->p == *obj.p;
+        }else {
+            return false;
+        }
+    }
+
     static void encode(Char unicode, pChar ptr){
         if (unicode <= 0x10FFFF) [[likely]] {
             *ptr = unicode;

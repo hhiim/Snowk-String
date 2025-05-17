@@ -6,8 +6,7 @@ add_includedirs("include/metaprogram")
 set_languages("c23", "c++23")
 
 add_cxxflags(
-    "-g","-w","-fpermissive",
-    -- "-O3", "-march=native",
+    "-g","-w","-fpermissive", "-O0",
     {force = true}
 )
 

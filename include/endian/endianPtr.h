@@ -66,6 +66,10 @@ public:
         return *this;
     }
 
+    // endianPtr& operator=(endianPtr rhs){
+    //     ptr = rhs.ptr;
+    // }
+
     using Ptr = T*; 
     operator Ptr() const{
         return ptr;

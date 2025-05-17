@@ -89,8 +89,9 @@ public:
                 comm.resource = resource;
                 comm.capacity = C::capacity(units); //
                 comm.size = units;
-                auto ptr = resource->allocate(comm.capacity*unisize);
-                comm.data = strPtr<E>(ptr);
+                // auto ptr = resource->allocate(comm.capacity*unisize);
+                // comm.data = strPtr<E>(ptr);
+                comm.data = resource->allocate(comm.capacity*unisize);
                 std::copy(
                     source.data(),
                     source.data()+units,
@@ -223,12 +224,13 @@ public:
             comm.size = r/unisize;
             comm.capacity = C::capacity(comm.size);
             comm.resource = resource;
-            ptr = endianPtr<unit, E>(resource->allocate(comm.size*unisize));
+            comm.data = resource->allocate(comm.capacity*unisize);
+            ptr = comm.data.data();
         }
         // TODO：对于兼容的编码（如UTF-8 和 ASCII），可以优化为直接拷贝
         for(auto c: obj) {
             code::encode(c, ptr);
-            ptr += code::encode_width(c) / unisize;
+            ptr += (code::encode_width(c) / unisize);
         }
     };
 
@@ -254,7 +256,7 @@ public:
     // std::cout 支持
     friend std::ostream& operator<<(std::ostream& os, string& str){
         auto u8str = string<UTF8>(str);
-        os  << (char*)u8str.data();
+        os  << (unsigned char*)u8str.data();
         return os;
     };
 };

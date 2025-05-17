@@ -1,31 +1,31 @@
 [
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-o", "build/.objs/main/linux/x86_64/release/src/main.cpp.o", "src/main.cpp"],
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-O0", "-o", "build/.objs/main/linux/x86_64/release/src/main.cpp.o", "src/main.cpp"],
   "file": "src/main.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/catch_amalgamated.cpp.o", "test/catch_amalgamated.cpp"],
+  "arguments": ["/usr/bin/gcc-14", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-O0", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/catch_amalgamated.cpp.o", "test/catch_amalgamated.cpp"],
   "file": "test/catch_amalgamated.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/ASCII.cpp.o", "test/ASCII.cpp"],
+  "arguments": ["/usr/bin/gcc-14", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-O0", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/ASCII.cpp.o", "test/ASCII.cpp"],
   "file": "test/ASCII.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/UTF8.cpp.o", "test/UTF8.cpp"],
+  "arguments": ["/usr/bin/gcc-14", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-O0", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/UTF8.cpp.o", "test/UTF8.cpp"],
   "file": "test/UTF8.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/UTF16.cpp.o", "test/UTF16.cpp"],
+  "arguments": ["/usr/bin/gcc-14", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-O0", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/UTF16.cpp.o", "test/UTF16.cpp"],
   "file": "test/UTF16.cpp"
 },
 {
   "directory": "/home/knight/桌面/Projects/String",
-  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/UTF32.cpp.o", "test/UTF32.cpp"],
+  "arguments": ["/usr/bin/gcc-14", "-c", "-m64", "-std=c++23", "-Iinclude/encode", "-Iinclude/endian", "-Iinclude/instances", "-Iinclude/metaprogram", "-Iinclude", "-g", "-w", "-fpermissive", "-O0", "-o", "build/.objs/Snowk-String-test/linux/x64/release/test/UTF32.cpp.o", "test/UTF32.cpp"],
   "file": "test/UTF32.cpp"
 }]

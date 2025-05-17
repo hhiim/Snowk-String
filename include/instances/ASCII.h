@@ -22,7 +22,17 @@ public:
     static Char decode(pachar p) {
         return static_cast<Char>(*p);
     }
-    
+
+    // 等于和不等于
+    template<template<endian>typename Temp, endian E0>
+    bool operator==(const Temp<E0> &obj) {
+        if constexpr(E0==E){
+            return *this->p == *obj.p;
+        }else {
+            return false;
+        }
+    }
+
     static void encode(Char unicode, pachar ptr){
         if (unicode <= 0x7F) [[likely]] {
             *ptr = static_cast<achar>(unicode);

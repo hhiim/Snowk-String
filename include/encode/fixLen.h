@@ -2,6 +2,8 @@
 #define FIXLEN_H
 
 #include "common.h"
+#include "logic.h"
+
 
 namespace Snowk::internal {
 
@@ -18,7 +20,7 @@ protected:
     static const endian E = getEndian<sub>::E;
     typedef endianless<char32_t, E> Char;
 
-    fixLen(){}
+    fixLen(): p(nullptr) {}
 public:
     endianPtr<T,E> p;
     T* data(){ return p; }
@@ -50,10 +52,6 @@ public:
         endianPtr<T,E> cursor = p;
         cursor += index;
         return sub::decode(cursor);
-    }
-
-    bool operator==(sub other){
-        return (this->p) == other.p;
     }
 
     // 获取单元级大小（不包括结尾 0）

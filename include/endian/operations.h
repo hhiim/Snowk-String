@@ -52,12 +52,12 @@
     template <typename X, typename Y>\
     bool operator op(const X lhs, const Y rhs){\
         if constexpr (isEndianless<X> && isEndianless<Y>)\
-            return lhs.get() op rhs.get();\
-        if constexpr (isEndianless<X>)\
-            return lhs.get() op rhs;\
-        if constexpr (isEndianless<Y>)\
-            return lhs op rhs.get();\
-        return lhs op rhs;\
+            {return lhs.get() op rhs.get();}\
+        else if constexpr (isEndianless<X>)\
+            {return lhs.get() op rhs;}\
+        else if constexpr (isEndianless<Y>)\
+            {return lhs op rhs.get();}\
+        else {return lhs op rhs;}\
     };
 
 
