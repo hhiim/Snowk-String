@@ -19,7 +19,7 @@ namespace Snowk{
 template <
     template <endian> typename strPtr,  // 字符串编码
     endian E = endian::native,          // 字符串字节序
-    Config C = defaultConfig       // 默认扩容策略
+    Config C = defaultConfig            // 默认扩容策略
 > requires Encode<strPtr>
 class string {
 public:
@@ -89,8 +89,6 @@ public:
                 comm.resource = resource;
                 comm.capacity = C::capacity(units); //
                 comm.size = units;
-                // auto ptr = resource->allocate(comm.capacity*unisize);
-                // comm.data = strPtr<E>(ptr);
                 comm.data = resource->allocate(comm.capacity*unisize);
                 std::copy(
                     source.data(),
@@ -165,6 +163,7 @@ public:
         });
     };
 
+    // 对变长编码（无随机访问能力）不推荐
     strPtr<E>::Char operator[](size_t i){
         return begin()[i];
     };
@@ -236,8 +235,7 @@ public:
 
     // 移动构造函数（编码/端序相同 && 不使用 SSO）
     template<Config C0> string (
-        string<strPtr, E, C0> &&obj,
-        memory_resource* resource = alloc()
+        string<strPtr, E, C0> &&obj
     ){
         obj.SSOreload([&](){
             sso.setSSO(true);
@@ -246,10 +244,12 @@ public:
             std::copy(obj.sso.data, obj.sso.data + size, sso.data);
         },[&](){
             sso.setSSO(false);
+            comm.resource  = obj.comm.resource;
             comm.capacity = obj.comm.capacity;
             comm.size = obj.comm.size;
             comm.data = obj.comm.data;
             obj.comm.data = code(nullptr);
+            obj.comm.resource = nullptr;
         });
     };
 
@@ -259,6 +259,80 @@ public:
         os  << (unsigned char*)u8str.data();
         return os;
     };
+
+    template<template <endian> typename strPtr0, endian E0, Config C0>
+    void operator+=(string<strPtr0, E0, C0>& obj){
+        // 计算右侧字符串追加后所需的单位数
+        size_t extra = 0;
+        for(auto c: obj){
+            extra += (code::encode_width(c) / unisize);
+        }
+        size_t current = this->size();
+        size_t total = current + extra;
+        
+        if(sso.isSSO()){
+            if(total <= remaining){
+                unit* dest = sso.data + current;
+                for(auto c: obj){
+                    int w = code::encode_width(c) / unisize;
+                    code::encode(c, dest);
+                    dest += w;
+                }
+                sso.setSize((unsigned char)total);
+            } else {
+                // SSO 模式下，新长度超出限制，转换到非 SSO 模式
+                memory_resource* resource = alloc();
+                size_t newCapacity = C::capacity(total);
+                auto ptr = resource->allocate(newCapacity * unisize);
+                // 拷贝现有 SSO 数据
+                std::copy(sso.data, sso.data + current, (unit*)ptr);
+                unit* dest = (unit*)ptr + current;
+                for(auto c: obj){
+                    int w = code::encode_width(c) / unisize;
+                    code::encode(c, dest);
+                    dest += w;
+                }
+                comm.resource = resource;
+                comm.capacity = newCapacity;
+                comm.size = total;
+                comm.data = strPtr<E>((unit*)ptr);
+                sso.setSSO(false);
+            }
+        } else { // 非 SSO 模式
+            if(total <= comm.capacity){
+                unit* dest = comm.data.data() + current;
+                for(auto c: obj){
+                    int w = code::encode_width(c) / unisize;
+                    code::encode(c, dest);
+                    dest += w;
+                }
+                comm.size = total;
+            } else {
+                memory_resource* resource = comm.resource;
+                size_t newCapacity = C::capacity(total);
+                auto ptr = resource->allocate(newCapacity * unisize);
+                // 拷贝已有数据
+                std::copy(comm.data.data(), comm.data.data() + current, (unit*)ptr);
+                unit* dest = (unit*)ptr + current;
+                for(auto c: obj){
+                    int w = code::encode_width(c) / unisize;
+                    code::encode(c, dest);
+                    dest += w;
+                }
+                resource->deallocate(comm.data.data(), comm.capacity * unisize);
+                comm.data = strPtr<E>((unit*)ptr);
+                comm.capacity = newCapacity;
+                comm.size = total;
+            }
+        }
+    }
+
+    template<template <endian> typename strPtr0, endian E0, Config C0>
+    string operator+(string<strPtr0, E0, C0>& obj){
+        string result(*this);
+        result += obj;
+        return result;
+    }
 };
 
 }
