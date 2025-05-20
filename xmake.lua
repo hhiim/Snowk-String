@@ -10,24 +10,28 @@ add_cxxflags(
     {force = true}
 )
 
+-- 打包
 target("Snowk-String")
+    set_arch("x64")
     set_default(true)
     set_kind("headeronly")
-    set_arch("x64")
+    add_headerfiles("include/**.h")
+    add_headerfiles("include/**.hpp")
+    
     set_basename("Snowk-String")
     add_includedirs("include", {public = true})
     set_toolchains("gcc-14")
-    set_targetdir("bin/x64")
 target_end()
 
-
+-- 手动测试
 target("main")
     add_files("src/*.cpp")
-    add_deps("Snowk-String")           -- 依赖主库
-    set_default(false)                 -- 不默认构建
-    on_install(function (target) end)  -- 空安装函数，不安装
+    add_deps("Snowk-String")
+    set_default(false)
+    on_install(function (target) end)
 target_end()
 
+-- 用例测试
 target("Snowk-String-test")
     set_default(false)
     set_arch("x64")
@@ -37,9 +41,9 @@ target("Snowk-String-test")
     set_targetdir("bin/x64/test")
     add_files("test/*.cpp")
 
-    add_deps("Snowk-String")           -- 依赖主库
-    set_default(false)                 -- 不默认构建
-    on_install(function (target) end)  -- 空安装函数，不安装
+    add_deps("Snowk-String")
+    set_default(false)
+    on_install(function (target) end)
 target_end()
 
 
